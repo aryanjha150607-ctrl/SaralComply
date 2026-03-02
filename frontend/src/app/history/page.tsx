@@ -31,8 +31,8 @@ export default function HistoryPage() {
             setIsLoading(true);
             try {
                 const [logsRes, tasksRes] = await Promise.all([
-                    fetch('http://localhost:3001/api/documents'),
-                    fetch('http://localhost:3001/api/tasks')
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/documents`),
+                    fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks`)
                 ]);
 
                 if (logsRes.ok) {

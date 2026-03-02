@@ -32,7 +32,7 @@ export default function DashboardLayout() {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/tasks');
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks`);
       if (response.ok) {
         const data = await response.json();
         setTasks(data);
@@ -54,7 +54,7 @@ export default function DashboardLayout() {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('http://localhost:3001/api/tasks', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: newTaskTitle, dueDate: newTaskDueDate })
@@ -82,7 +82,7 @@ export default function DashboardLayout() {
 
     setIsExtracting(true);
     try {
-      const response = await fetch('http://localhost:3001/api/tasks/extract', {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks/extract`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: extractText })
@@ -105,7 +105,7 @@ export default function DashboardLayout() {
 
   const handleCompleteTask = async (taskId: number) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: 'Completed' })
@@ -118,7 +118,7 @@ export default function DashboardLayout() {
 
   const handleDeleteTask = async (taskId: number) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/tasks/${taskId}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks/${taskId}`, {
         method: 'DELETE'
       });
       if (response.ok) fetchTasks();
@@ -302,8 +302,8 @@ export default function DashboardLayout() {
                                 <h4 className={`text-sm font-semibold transition-colors ${task.status === 'Completed' ? 'text-slate-500 line-through' : 'text-slate-900 group-hover:text-indigo-900'}`}>{task.title}</h4>
                                 {task.status !== 'Completed' && (
                                   <span className={`text-[10px] uppercase tracking-wider font-bold px-2 py-0.5 rounded-full ${task.severity === 'High' ? 'bg-rose-100 text-rose-700 border border-rose-200 shadow-[0_0_8px_rgba(225,29,72,0.2)]' :
-                                      task.severity === 'Low' ? 'bg-sky-100 text-sky-700 border border-sky-200' :
-                                        'bg-amber-100 text-amber-700 border border-amber-200'
+                                    task.severity === 'Low' ? 'bg-sky-100 text-sky-700 border border-sky-200' :
+                                      'bg-amber-100 text-amber-700 border border-amber-200'
                                     }`}>
                                     {task.severity}
                                   </span>

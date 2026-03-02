@@ -29,7 +29,7 @@ export default function RegulationsPage() {
         setToastMessage(null);
 
         try {
-            const response = await fetch('http://localhost:3001/api/tasks/extract', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks/extract`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text: selectedRegulation.fullText })

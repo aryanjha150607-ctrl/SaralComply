@@ -63,7 +63,7 @@ export default function DocumentsPage() {
         formData.append('file', selectedFile);
 
         try {
-            const response = await fetch('http://localhost:3001/api/tasks/upload-pdf', {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/api/tasks/upload-pdf`, {
                 method: 'POST',
                 body: formData, // the browser automatically sets the multipart boundary
             });
