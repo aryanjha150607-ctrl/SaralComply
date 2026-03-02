@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: saralcomply-backend
+    env: docker # Using Docker environment to utilize the Dockerfile
+    region: oregon # Update to your preferred region
+    plan: free # Update if you require higher tier
+    rootDir: backend
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: GEMINI_API_KEY
+        sync: false # Set securely in the Render Dashboard
+      - key: DATABASE_URL
+        sync: false # Set securely in the Render Dashboard (e.g. Postgres internal URL)
